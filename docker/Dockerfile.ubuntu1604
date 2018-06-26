@@ -1,9 +1,12 @@
 FROM ubuntu:16.04
+MAINTAINER   Andrey Bronin <jonnib@yandex.ru>
+CMD          bash
 
 RUN apt-get update && \
 apt-get install -y --no-install-recommends \
+apt-utils \
 ca-certificates \
-g++ \
+build-essential \
 git \
 llvm-dev \
 make \
@@ -14,8 +17,6 @@ libboost-dev \
 libboost-iostreams-dev
 
 
-RUN echo "git config --global http.sslVerify false" &&\
-cd /home && git clone --depth=1 https://github.com/google/googletest.git &&\ 
+RUN cd /home && git clone --depth=1 https://github.com/google/googletest.git &&\ 
 cd googletest && cmake . && make install -j5
 
-RUN cd /home && git clone --recursive https://github.com/AndreyBronin/autoprogrammer
