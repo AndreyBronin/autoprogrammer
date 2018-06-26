@@ -5,7 +5,7 @@ services:
 before_install:
   - docker pull bronin/travis16.04
   - docker run -itd --name build bronin/travis16.04
-  - docker exec build git clone https://github.com/AndreyBronin/autoprogrammer.git /repo
+  - docker exec build git clone --depth=1 --recursive https://github.com/AndreyBronin/autoprogrammer.git /repo
 script:
   - docker exec build cmake -H/repo -B/build
   - docker exec build cmake --build /build
