@@ -1,0 +1,21 @@
+FROM ubuntu:16.04
+
+RUN apt-get update && \
+apt-get install -y --no-install-recommends \
+ca-certificates \
+g++ \
+git \
+llvm-dev \
+make \
+cmake \
+libclang-5.0-dev \
+llvm-5.0-dev \
+libboost-dev \
+libboost-iostreams-dev
+
+
+RUN echo "git config --global http.sslVerify false" &&\
+cd /home && git clone --depth=1 https://github.com/google/googletest.git &&\ 
+cd googletest && cmake . && make install -j5
+
+RUN cd /home && git clone --recursive https://github.com/AndreyBronin/autoprogrammer
